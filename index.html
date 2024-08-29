@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Content Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        button { padding: 10px 20px; font-size: 16px; }
+        #content { margin-top: 20px; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h1>AI Content Generator</h1>
+    <button onclick="generateContent()">콘텐츠 생성하기</button>
+    <div id="content"></div>
+
+    <script>
+        async function generateContent() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerText = '생성 중...';
+            
+            try {
+                const response = await axios.post('/api/generate');
+                contentDiv.innerText = response.data;
+            } catch (error) {
+                contentDiv.innerText = '오류가 발생했습니다. 다시 시도해 주세요.';
+            }
+        }
+    </script>
+</body>
+</html>
